@@ -6,16 +6,16 @@ const BASE = 'https://trip-prog.github.io/';
 
 /* ---------- данные проектов ---------- */
 const PROJECTS = [
-  { slug: 'maestro-kitchens',             title: 'MAESTRO KITCHENS', tags: ['кухни на заказ', 'тёмный премиум', 'квиз-конфигуратор'], hot: 'квиз-конфигуратор', span: 7 },
-  { slug: 'proremont-landing',            title: 'ПРОРЕМОНТ',        tags: ['ремонт под ключ', 'калькулятор сметы', 'до/после'], hot: 'калькулятор сметы', span: 5 },
-  { slug: 'estet-dent-landing',           title: 'ESTET DENT',       tags: ['стоматология', 'тёмный + золото', 'онлайн-запись'], span: 5 },
-  { slug: 'nova-development-landing',     title: 'NOVA DEVELOPMENT', tags: ['застройщик', 'планировки', 'ипотечный калькулятор'], hot: 'ипотечный калькулятор', span: 7 },
-  { slug: 'brutal-barbershop',            title: 'BRUTAL',           tags: ['барбершоп', 'тёмный гранж', 'онлайн-бронь'], span: 7 },
-  { slug: 'aurea-landing',                title: 'AUREA',            tags: ['косметология', 'нюд-палитра', 'слайдер до/после'], span: 5 },
-  { slug: 'rostov-remont',                title: 'ROSTOV REMONT',    tags: ['ремонт квартир', 'светлый премиум', 'белый + золото'], span: 5 },
-  { slug: 'shine-studio-detailing',       title: 'SHINE STUDIO',     tags: ['детейлинг', 'тёмный премиум', 'прайс-пакеты'], span: 7 },
-  { slug: 'freshbox-landing',             title: 'FRESHBOX',         tags: ['доставка питания', 'конструктор рациона', 'подписка'], hot: 'конструктор рациона', span: 7 },
-  { slug: 'chistodoma-landing',           title: 'ЧИСТОДОМА',        tags: ['клининг', 'калькулятор уборки', 'подписка'], span: 5 },
+  { slug: 'maestro-kitchens',         title: 'MAESTRO KITCHENS', desc: 'Тёмный премиум-лендинг кухонь на заказ. Квиз-конфигуратор сам считает цену и собирает заявки.', tags: ['кухни на заказ', 'тёмный премиум', 'квиз-конфигуратор'], hot: 'квиз-конфигуратор' },
+  { slug: 'proremont-landing',        title: 'ПРОРЕМОНТ',        desc: 'Ремонт под ключ: калькулятор сметы, этапы работ и блок «до/после».', tags: ['ремонт под ключ', 'калькулятор сметы', 'до/после'], hot: 'калькулятор сметы' },
+  { slug: 'estet-dent-landing',       title: 'ESTET DENT',       desc: 'Стоматология в тёмном золоте: услуги, врачи, онлайн-запись на приём.', tags: ['стоматология', 'тёмный + золото', 'онлайн-запись'] },
+  { slug: 'nova-development-landing', title: 'NOVA DEVELOPMENT', desc: 'Сайт застройщика: планировки, ход строительства и ипотечный калькулятор.', tags: ['застройщик', 'планировки', 'ипотечный калькулятор'], hot: 'ипотечный калькулятор' },
+  { slug: 'brutal-barbershop',        title: 'BRUTAL',           desc: 'Гранжевый барбершоп: прайс, мастера и бронь в пару кликов.', tags: ['барбершоп', 'тёмный гранж', 'онлайн-бронь'] },
+  { slug: 'aurea-landing',            title: 'AUREA',            desc: 'Косметология в нюд-палитре со слайдером «до/после» на живых фото.', tags: ['косметология', 'нюд-палитра', 'слайдер до/после'] },
+  { slug: 'rostov-remont',            title: 'ROSTOV REMONT',    desc: 'Светлый бело-золотой лендинг ремонта квартир в Ростове.', tags: ['ремонт квартир', 'светлый премиум', 'белый + золото'] },
+  { slug: 'shine-studio-detailing',   title: 'SHINE STUDIO',     desc: 'Детейлинг-студия: пакеты услуг, галерея работ и запись онлайн.', tags: ['детейлинг', 'тёмный премиум', 'прайс-пакеты'] },
+  { slug: 'freshbox-landing',         title: 'FRESHBOX',         desc: 'Доставка питания: конструктор рациона, календарь и подписка.', tags: ['доставка питания', 'конструктор рациона', 'подписка'], hot: 'конструктор рациона' },
+  { slug: 'chistodoma-landing',       title: 'ЧИСТОДОМА',        desc: 'Клининг с калькулятором уборки и подпиской на регулярный сервис.', tags: ['клининг', 'калькулятор уборки', 'подписка'] },
 ];
 
 /* сайты, которые показываются на экране ноутбука */
@@ -32,7 +32,7 @@ const SHOWCASE = ['maestro-kitchens', 'freshbox-landing', 'aurea-landing'];
   addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
     dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%)`;
-    const t = e.target.closest('a, button, .project-card');
+    const t = e.target.closest('a, button');
     cur.classList.toggle('is-link', !!t);
   }, { passive: true });
 
@@ -115,36 +115,83 @@ const SHOWCASE = ['maestro-kitchens', 'freshbox-landing', 'aurea-landing'];
   });
 })();
 
-/* ---------- карточки проектов ---------- */
-function projectCard(p, i) {
+/* ---------- слайды проектов ---------- */
+function projectSlide(p, i) {
   const url = BASE + p.slug + '/';
   const shortUrl = url.replace('https://', '');
-  const a = document.createElement('a');
-  a.className = 'project-card reveal' + (p.span ? ' span-' + p.span : '');
-  a.href = url;
-  a.target = '_blank';
-  a.rel = 'noopener';
-  a.innerHTML = `
-    <div class="browser-frame">
-      <div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">${shortUrl}</span></div>
-      <div class="preview" data-src="${url}"><span class="ph">// загрузка превью</span></div>
-    </div>
-    <div class="project-meta">
-      <div class="project-top">
-        <span class="project-num">${String(i + 1).padStart(2, '0')}</span>
-        <h3>${p.title}</h3>
-        <span class="project-arrow">↗</span>
-      </div>
+  const el = document.createElement('article');
+  el.className = 'slide' + (i % 2 ? ' slide-flip' : '');
+  el.innerHTML = `
+    <div class="slide-meta">
+      <div class="slide-num">${String(i + 1).padStart(2, '0')}</div>
+      <h3 class="slide-title">${p.title}</h3>
+      <p class="slide-desc">${p.desc}</p>
       <div class="project-tags">
         ${p.tags.map(t => `<span class="tag${t === p.hot ? ' hot' : ''}">${t}</span>`).join('')}
       </div>
-    </div>`;
-  return a;
+      <a class="btn btn-ghost btn-sm slide-open" href="${url}" target="_blank" rel="noopener">Открыть сайт ↗</a>
+    </div>
+    <a class="browser-frame" href="${url}" target="_blank" rel="noopener" aria-label="${p.title}">
+      <div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">${shortUrl}</span></div>
+      <div class="preview" data-src="${url}"><span class="ph">// загрузка превью</span></div>
+      <div class="slide-hint mono">наведи — сайт пролистается</div>
+    </a>`;
+  return el;
 }
 
 (() => {
-  const grid = document.getElementById('projects-grid');
-  if (grid) PROJECTS.forEach((p, i) => grid.appendChild(projectCard(p, i)));
+  const track = document.getElementById('projects-track');
+  if (track) PROJECTS.forEach((p, i) => track.appendChild(projectSlide(p, i)));
+})();
+
+/* ---------- горизонтальная лента на скролле ---------- */
+(() => {
+  const pin = document.getElementById('projects');
+  const track = document.getElementById('projects-track');
+  if (!pin || !track) return;
+  const count = document.getElementById('proj-count');
+  const fill = document.getElementById('proj-bar-fill');
+  const mq = matchMedia('(min-width: 901px)');
+  const SPEED = 1.4; // px ленты на 1px прокрутки страницы
+  const N = PROJECTS.length;
+  let extra = 0, pinTop = 0, target = 0, cur = 0;
+
+  function onScroll() {
+    if (!mq.matches) return;
+    target = Math.min(Math.max((scrollY - pinTop) * SPEED, 0), extra);
+  }
+
+  function layout() {
+    if (!mq.matches) {
+      pin.style.height = '';
+      track.style.transform = '';
+      cur = target = 0;
+      return;
+    }
+    extra = Math.max(track.scrollWidth - innerWidth, 0);
+    pin.style.height = Math.round(innerHeight + extra / SPEED) + 'px';
+    pinTop = pin.getBoundingClientRect().top + scrollY;
+    onScroll();
+  }
+
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', layout, { passive: true });
+  addEventListener('load', layout);
+  if (document.fonts?.ready) document.fonts.ready.then(layout);
+  if (mq.addEventListener) mq.addEventListener('change', layout);
+  layout();
+
+  (function loop() {
+    if (mq.matches && extra > 0) {
+      cur += (target - cur) * 0.095;
+      if (Math.abs(target - cur) < .05) cur = target;
+      track.style.transform = `translate3d(${(-cur).toFixed(1)}px, 0, 0)`;
+      const pr = cur / extra;
+      if (fill) fill.style.width = (pr * 100).toFixed(2) + '%';
+      if (count) count.textContent = String(Math.min(N, Math.round(pr * (N - 1)) + 1)).padStart(2, '0') + ' / ' + N;
+    }
+    requestAnimationFrame(loop);
+  })();
 })();
 
 /* ---------- ленивые iframe-превью + масштаб ---------- */
@@ -155,9 +202,7 @@ function projectCard(p, i) {
   const fit = (box) => {
     const f = box.querySelector('iframe');
     if (!f) return;
-    const w = box.clientWidth, h = box.clientHeight;
-    const s = Math.max(w / 1440, h / 902);
-    f.style.transform = `translateX(${((w - 1440 * s) / 2).toFixed(1)}px) scale(${s.toFixed(4)})`;
+    f.style.transform = `scale(${(box.clientWidth / 1440).toFixed(4)})`;
   };
 
   const io = new IntersectionObserver((entries) => {
@@ -170,15 +215,84 @@ function projectCard(p, i) {
       f.loading = 'lazy';
       f.setAttribute('tabindex', '-1');
       f.setAttribute('aria-hidden', 'true');
-      f.setAttribute('scrolling', 'no');
-      f.addEventListener('load', () => box.querySelector('.ph')?.remove(), { once: true });
+      f.addEventListener('load', () => {
+        box.querySelector('.ph')?.remove();
+        // прячем скроллбар внутри превью (same-origin на проде)
+        try {
+          const d = f.contentDocument;
+          const st = d.createElement('style');
+          st.textContent = 'html::-webkit-scrollbar,body::-webkit-scrollbar{display:none!important}html,body{scrollbar-width:none!important}';
+          (d.head || d.documentElement).appendChild(st);
+        } catch { /* cross-origin в dev */ }
+      }, { once: true });
       box.appendChild(f);
       fit(box);
     });
-  }, { rootMargin: '500px 0px' });
+  }, { rootMargin: '300px 1400px 300px 1400px' });
 
   previews.forEach(p => io.observe(p));
   addEventListener('resize', () => previews.forEach(fit), { passive: true });
+})();
+
+/* ---------- автопросмотр: сайт листается при наведении ---------- */
+(() => {
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  document.querySelectorAll('.slide .browser-frame').forEach(frame => {
+    const box = frame.querySelector('.preview');
+    if (!box) return;
+    let raf = null, mode = 0, last = 0;
+
+    function step(ts) {
+      const f = box.querySelector('iframe');
+      if (!f || !mode) { raf = null; return; }
+      let win, max;
+      try {
+        win = f.contentWindow;
+        max = win.document.documentElement.scrollHeight - win.innerHeight;
+      } catch { raf = null; return; }
+      if (max <= 0) { raf = null; return; }
+      if (!last) last = ts;
+      const dt = Math.min((ts - last) / 1000, .05);
+      last = ts;
+      const speed = mode > 0 ? 620 : 2800;
+      let y = win.scrollY + mode * speed * dt;
+      y = Math.max(0, Math.min(y, max));
+      win.scrollTo({ top: y, behavior: 'instant' });
+      if ((mode > 0 && y >= max) || (mode < 0 && y <= 0)) { raf = null; return; }
+      raf = requestAnimationFrame(step);
+    }
+
+    const start = m => { mode = m; last = 0; if (raf === null) raf = requestAnimationFrame(step); };
+    frame.addEventListener('mouseenter', () => start(1));
+    frame.addEventListener('mouseleave', () => start(-1));
+  });
+})();
+
+/* ---------- магнитные кнопки ---------- */
+(() => {
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  const strength = 0.26;
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const dx = (e.clientX - r.left - r.width / 2) * strength;
+      const dy = (e.clientY - r.top - r.height / 2) * strength;
+      btn.style.transform = `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px)`;
+    });
+    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+  });
+})();
+
+/* ---------- пасхалка: взрыв по клику на логотип ---------- */
+(() => {
+  const logo = document.querySelector('.logo');
+  if (!logo) return;
+  logo.addEventListener('click', () => {
+    if (typeof window.fluidBurst === 'function') window.fluidBurst(16);
+    logo.classList.remove('boom');
+    void logo.offsetWidth; // перезапуск анимации
+    logo.classList.add('boom');
+  });
 })();
 
 /* ---------- reveal при скролле ---------- */

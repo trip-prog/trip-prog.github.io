@@ -1415,6 +1415,11 @@ function multipleSplats (amount) {
     }
 }
 
+// пасхалка: main.js дёргает это по клику на логотип
+window.fluidBurst = function (amount) {
+    splatStack.push(amount || 12);
+};
+
 function splat (x, y, dx, dy, color) {
     splatProgram.bind();
     gl.uniform1i(splatProgram.uniforms.uTarget, velocity.read.attach(0));

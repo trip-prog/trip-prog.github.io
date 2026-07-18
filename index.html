@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>trip-prog — создаю сайты, которые решают бизнес-задачи</title>
-  <meta name="description" content="Веб-разработчик. Лендинги, интернет-магазины, автоматизация и AI-решения. 16 живых проектов — каждый можно открыть и потрогать.">
+  <meta name="description" content="Веб-разработчик. Лендинги, интернет-магазины, автоматизация и AI-решения. 10 живых проектов — каждый можно открыть и потрогать.">
   <meta property="og:title" content="trip-prog — разработка сайтов">
   <meta property="og:description" content="Лендинги, интерфейсы, автоматизация. Все работы живые — открывай и смотри.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80' fill='%23ff2d3a' font-family='monospace'>/</text></svg>">
@@ -122,12 +122,20 @@
   </section>
 
   <!-- ===== PROJECTS ===== -->
-  <section class="section" id="projects">
-    <div class="section-head reveal">
-      <div class="mono section-index">02 / проекты</div>
-      <h2>Избранные проекты</h2>
+  <section class="projects-pin" id="projects">
+    <div class="projects-sticky">
+      <div class="projects-head reveal">
+        <div>
+          <div class="mono section-index">02 / проекты</div>
+          <h2>Избранные проекты</h2>
+        </div>
+        <div class="projects-progress" aria-hidden="true">
+          <span class="mono" id="proj-count">01 / 10</span>
+          <div class="proj-bar"><i id="proj-bar-fill"></i></div>
+        </div>
+      </div>
+      <div class="projects-track" id="projects-track"><!-- js --></div>
     </div>
-    <div class="projects-grid" id="projects-grid"><!-- js --></div>
   </section>
 
   <!-- ===== ABOUT ===== -->
