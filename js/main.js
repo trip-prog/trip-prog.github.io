@@ -16,15 +16,6 @@ const PROJECTS = [
   { slug: 'shine-studio-detailing',       title: 'SHINE STUDIO',     tags: ['детейлинг', 'тёмный премиум', 'прайс-пакеты'], span: 7 },
   { slug: 'freshbox-landing',             title: 'FRESHBOX',         tags: ['доставка питания', 'конструктор рациона', 'подписка'], hot: 'конструктор рациона', span: 7 },
   { slug: 'chistodoma-landing',           title: 'ЧИСТОДОМА',        tags: ['клининг', 'калькулятор уборки', 'подписка'], span: 5 },
-  { slug: 'potolok-pro',                  title: 'ПОТОЛОК PRO',      tags: ['натяжные потолки', 'монтаж за 1 день', 'запись на замер'], span: 5 },
-  { slug: 'apartment-renovation-landing', title: 'РЕМОНТ-ИНТЕРАКТИВ', tags: ['ремонт квартир', 'комната собирается при скролле'], hot: 'скролл-анимация', span: 7 },
-  { slug: 'perimetr-landing',             title: 'ПЕРИМЕТР',         tags: ['SaaS / антифрод', 'продуктовый лендинг', 'b2b'], span: 12 },
-];
-
-const LAB = [
-  { slug: 'portfolio',       title: 'CAPSULE',       tags: ['three.js', 'WebGL-капсулы', 'портфолио-концепт'] },
-  { slug: 'domik-portfolio', title: 'ДОМИК',         tags: ['three.js', 'интерактивный 3D-кейс'] },
-  { slug: 'dala-portfolio',  title: 'СЕТЬ ОПЫТА',    tags: ['интерактивный граф', 'генеративный фон'] },
 ];
 
 /* сайты, которые показываются на экране ноутбука */
@@ -79,7 +70,7 @@ const SHOWCASE = ['maestro-kitchens', 'freshbox-landing', 'aurea-landing'];
     addEventListener('mousemove', e => {
       const nx = e.clientX / innerWidth;   // 0..1
       const ny = e.clientY / innerHeight;  // 0..1
-      tryy = -26 + nx * 34;                // -26 .. 8
+      tryy = 8 - nx * 34;                  //   8 .. -26
       trx  = 14 - ny * 13;                 //  14 .. 1
     }, { passive: true });
   }
@@ -125,7 +116,7 @@ const SHOWCASE = ['maestro-kitchens', 'freshbox-landing', 'aurea-landing'];
 })();
 
 /* ---------- карточки проектов ---------- */
-function projectCard(p, i, lab = false) {
+function projectCard(p, i) {
   const url = BASE + p.slug + '/';
   const shortUrl = url.replace('https://', '');
   const a = document.createElement('a');
@@ -140,7 +131,7 @@ function projectCard(p, i, lab = false) {
     </div>
     <div class="project-meta">
       <div class="project-top">
-        <span class="project-num">${String(i + 1).padStart(2, '0')}${lab ? 'x' : ''}</span>
+        <span class="project-num">${String(i + 1).padStart(2, '0')}</span>
         <h3>${p.title}</h3>
         <span class="project-arrow">↗</span>
       </div>
@@ -153,9 +144,7 @@ function projectCard(p, i, lab = false) {
 
 (() => {
   const grid = document.getElementById('projects-grid');
-  const labGrid = document.getElementById('lab-grid');
   if (grid) PROJECTS.forEach((p, i) => grid.appendChild(projectCard(p, i)));
-  if (labGrid) LAB.forEach((p, i) => labGrid.appendChild(projectCard(p, i, true)));
 })();
 
 /* ---------- ленивые iframe-превью + масштаб ---------- */
@@ -231,7 +220,7 @@ function projectCard(p, i, lab = false) {
 
   const LINES = [
     ['whoami', 'веб-разработчик и дизайнер интерфейсов'],
-    ['ls ~/projects | wc -l', '16 живых сайтов, все в продакшене'],
+    ['ls ~/projects | wc -l', '10 живых сайтов, все в продакшене'],
     ['stack --main', 'js · react · three.js · python · node'],
     ['status', '<span class="p">●</span> открыт к новым проектам'],
   ];
