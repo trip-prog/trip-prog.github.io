@@ -64,13 +64,13 @@ const SHOWCASE = ['maestro-kitchens', 'freshbox-landing', 'aurea-landing'];
   const laptop = document.getElementById('laptop');
   if (!laptop) return;
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
-  let trx = 8, tryy = -16, crx = 8, cry = -16;
+  let trx = 8, tryy = 9, crx = 8, cry = 9;
 
   if (fine) {
     addEventListener('mousemove', e => {
       const nx = e.clientX / innerWidth;   // 0..1
       const ny = e.clientY / innerHeight;  // 0..1
-      tryy = 8 - nx * 34;                  //   8 .. -26
+      tryy = 26 - nx * 34;                 //  26 .. -8, в центре +9: смотрит чуть влево, на посетителя
       trx  = 14 - ny * 13;                 //  14 .. 1
     }, { passive: true });
   }

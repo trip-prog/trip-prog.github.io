@@ -214,7 +214,7 @@ a { color: inherit; text-decoration: none; }
   50% { transform: translateY(-13px); }
 }
 .laptop {
-  --rx: 8deg; --ry: -16deg;
+  --rx: 8deg; --ry: 9deg;
   position: relative;
   width: 540px;
   transform-style: preserve-3d;
