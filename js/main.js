@@ -6,19 +6,23 @@ const BASE = 'https://trip-prog.github.io/';
 
 /* ---------- данные проектов ---------- */
 const PROJECTS = [
-  { slug: 'ai-assistant',             title: 'НЕЙРО-АССИСТЕНТ',  desc: 'ИИ-ассистент, который отвечает клиентам по базе знаний компании — на сайте и в Telegram. RAG-поиск + нейросеть, работает в России на YandexGPT. Отвечает только фактами, не выдумывает.', tags: ['ИИ-ассистент', 'RAG + нейросеть', 'сайт + Telegram'], hot: 'ИИ-ассистент' },
-  { slug: 'glina-shop',               title: 'ГЛИНА',            desc: 'Интернет-магазин керамики ручной работы: витрина, корзина и оформление заказа. Заказы падают прямо в Telegram-бот — там же меняются статусы, без всякой CMS.', tags: ['интернет-магазин', 'React + Node', 'Telegram-админка'], hot: 'Telegram-админка' },
-  { slug: 'maestro-kitchens',         title: 'MAESTRO KITCHENS', desc: 'Тёмный премиум-лендинг кухонь на заказ. Квиз-конфигуратор сам считает цену и собирает заявки.', tags: ['кухни на заказ', 'тёмный премиум', 'квиз-конфигуратор'], hot: 'квиз-конфигуратор' },
-  { slug: 'proremont-landing',        title: 'ПРОРЕМОНТ',        desc: 'Ремонт под ключ: калькулятор сметы, этапы работ и блок «до/после».', tags: ['ремонт под ключ', 'калькулятор сметы', 'до/после'], hot: 'калькулятор сметы' },
-  { slug: 'estet-dent-landing',       title: 'ESTET DENT',       desc: 'Стоматология в тёмном золоте: услуги, врачи, онлайн-запись на приём.', tags: ['стоматология', 'тёмный + золото', 'онлайн-запись'] },
+  { slug: 'ai-assistant',             title: 'НЕЙРО-АССИСТЕНТ',  desc: 'ИИ-ассистент, который отвечает клиентам по базе знаний компании — на сайте и в Telegram. RAG-поиск + нейросеть, работает в России на YandexGPT. Отвечает только фактами, не выдумывает.', tags: ['ИИ-ассистент', 'RAG + нейросеть', 'сайт + Telegram'], hot: 'ИИ-ассистент', feat: true },
+  { slug: 'glina-shop',               title: 'ГЛИНА',            desc: 'Интернет-магазин керамики ручной работы: витрина, корзина и оформление заказа. Заказы падают прямо в Telegram-бот — там же меняются статусы, без всякой CMS.', tags: ['интернет-магазин', 'React + Node', 'Telegram-админка'], hot: 'Telegram-админка', feat: true },
+  { slug: 'maestro-kitchens',         title: 'MAESTRO KITCHENS', desc: 'Тёмный премиум-лендинг кухонь на заказ. Квиз-конфигуратор сам считает цену и собирает заявки.', tags: ['кухни на заказ', 'тёмный премиум', 'квиз-конфигуратор'], hot: 'квиз-конфигуратор', feat: true },
+  { slug: 'proremont-landing',        title: 'ПРОРЕМОНТ',        desc: 'Ремонт под ключ: калькулятор сметы, этапы работ и блок «до/после».', tags: ['ремонт под ключ', 'калькулятор сметы', 'до/после'], hot: 'калькулятор сметы', feat: true },
   { slug: 'nova-development-landing', title: 'NOVA DEVELOPMENT', desc: 'Сайт застройщика: планировки, ход строительства и ипотечный калькулятор.', tags: ['застройщик', 'планировки', 'ипотечный калькулятор'], hot: 'ипотечный калькулятор' },
-  { slug: 'brutal-barbershop',        title: 'BRUTAL',           desc: 'Гранжевый барбершоп: прайс, мастера и бронь в пару кликов.', tags: ['барбершоп', 'тёмный гранж', 'онлайн-бронь'] },
+  { slug: 'freshbox-landing',         title: 'FRESHBOX',         desc: 'Доставка питания: конструктор рациона, календарь и подписка.', tags: ['доставка питания', 'конструктор рациона', 'подписка'], hot: 'конструктор рациона' },
+  { slug: 'estet-dent-landing',       title: 'ESTET DENT',       desc: 'Стоматология в тёмном золоте: услуги, врачи, онлайн-запись на приём.', tags: ['стоматология', 'тёмный + золото', 'онлайн-запись'] },
   { slug: 'aurea-landing',            title: 'AUREA',            desc: 'Косметология в нюд-палитре со слайдером «до/после» на живых фото.', tags: ['косметология', 'нюд-палитра', 'слайдер до/после'] },
+  { slug: 'brutal-barbershop',        title: 'BRUTAL',           desc: 'Гранжевый барбершоп: прайс, мастера и бронь в пару кликов.', tags: ['барбершоп', 'тёмный гранж', 'онлайн-бронь'] },
   { slug: 'rostov-remont',            title: 'ROSTOV REMONT',    desc: 'Светлый бело-золотой лендинг ремонта квартир в Ростове.', tags: ['ремонт квартир', 'светлый премиум', 'белый + золото'] },
   { slug: 'shine-studio-detailing',   title: 'SHINE STUDIO',     desc: 'Детейлинг-студия: пакеты услуг, галерея работ и запись онлайн.', tags: ['детейлинг', 'тёмный премиум', 'прайс-пакеты'] },
-  { slug: 'freshbox-landing',         title: 'FRESHBOX',         desc: 'Доставка питания: конструктор рациона, календарь и подписка.', tags: ['доставка питания', 'конструктор рациона', 'подписка'], hot: 'конструктор рациона' },
   { slug: 'chistodoma-landing',       title: 'ЧИСТОДОМА',        desc: 'Клининг с калькулятором уборки и подпиской на регулярный сервис.', tags: ['клининг', 'калькулятор уборки', 'подписка'] },
 ];
+
+/* флагманы — крупная горизонтальная лента; остальные — плывущая строка */
+const FEATURED = PROJECTS.filter(p => p.feat);
+const FLOW = PROJECTS.filter(p => !p.feat);
 
 /* сайты, которые показываются на экране ноутбука */
 const SHOWCASE = ['ai-assistant', 'glina-shop', 'maestro-kitchens'];
@@ -143,7 +147,33 @@ function projectSlide(p, i) {
 
 (() => {
   const track = document.getElementById('projects-track');
-  if (track) PROJECTS.forEach((p, i) => track.appendChild(projectSlide(p, i)));
+  if (track) FEATURED.forEach((p, i) => track.appendChild(projectSlide(p, i)));
+})();
+
+/* ---------- плывущая лента остальных проектов ---------- */
+function flowCard(p) {
+  const url = BASE + p.slug + '/';
+  const el = document.createElement('a');
+  el.className = 'flow-card';
+  el.href = url;
+  el.target = '_blank';
+  el.rel = 'noopener';
+  el.setAttribute('aria-label', p.title);
+  el.innerHTML = `
+    <div class="preview flow-preview" data-src="${url}"><span class="ph">// ${p.title}</span></div>
+    <div class="flow-cap">
+      <span class="flow-title">${p.title}</span>
+      <span class="flow-tag mono">${p.tags[0]}</span>
+    </div>`;
+  return el;
+}
+
+(() => {
+  const track = document.getElementById('flow-track');
+  if (!track || !FLOW.length) return;
+  FLOW.forEach(p => track.appendChild(flowCard(p)));
+  // дубль карточек-заглушек (iframe ещё не созданы) — для бесшовного цикла marquee
+  track.append(...[...track.children].map(c => c.cloneNode(true)));
 })();
 
 /* ---------- горизонтальная лента на скролле ---------- */
@@ -155,7 +185,7 @@ function projectSlide(p, i) {
   const fill = document.getElementById('proj-bar-fill');
   const mq = matchMedia('(min-width: 901px)');
   const SPEED = 1.4; // px ленты на 1px прокрутки страницы
-  const N = PROJECTS.length;
+  const N = FEATURED.length;
   let extra = 0, pinTop = 0, target = 0, cur = 0;
 
   function onScroll() {
@@ -190,7 +220,7 @@ function projectSlide(p, i) {
       track.style.transform = `translate3d(${(-cur).toFixed(1)}px, 0, 0)`;
       const pr = cur / extra;
       if (fill) fill.style.width = (pr * 100).toFixed(2) + '%';
-      if (count) count.textContent = String(Math.min(N, Math.round(pr * (N - 1)) + 1)).padStart(2, '0') + ' / ' + N;
+      if (count) count.textContent = String(Math.min(N, Math.round(pr * (N - 1)) + 1)).padStart(2, '0') + ' / ' + String(N).padStart(2, '0');
     }
     requestAnimationFrame(loop);
   })();
@@ -239,7 +269,11 @@ function projectSlide(p, i) {
 /* ---------- автопросмотр: сайт листается при наведении ---------- */
 (() => {
   if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-  document.querySelectorAll('.slide .browser-frame').forEach(frame => {
+  const frames = [
+    ...document.querySelectorAll('.slide .browser-frame'),
+    ...document.querySelectorAll('.flow-card'),
+  ];
+  frames.forEach(frame => {
     const box = frame.querySelector('.preview');
     if (!box) return;
     let raf = null, mode = 0, last = 0;
