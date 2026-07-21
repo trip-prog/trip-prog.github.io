@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Нейро-ассистент для бизнеса — отвечает клиентам за вас 24/7</title>
+  <meta name="description" content="ИИ-ассистент, который отвечает клиентам по базе знаний вашей компании: на сайте и в Telegram. Не выдумывает, отвечает только фактами. Демо — в правом нижнем углу." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='82' font-size='82'>🤖</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Golos+Text:wght@600;700;800;900&display=swap&subset=cyrillic" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/widget.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --accent: #6d5efc; --accent-2: #8f7bff; --accent-3: #22b8cf;
+      --ink: #14162b; --muted: #5b5f78; --line: #e9e9f3;
+      --bg: #f6f6fc; --surface: #fff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Manrope", system-ui, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    h1, h2, h3 { font-family: "Golos Text", "Manrope", sans-serif; line-height: 1.1; letter-spacing: -0.02em; }
+    a { color: inherit; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .accent { color: var(--accent); }
+
+    /* NAV */
+    .nav { position: sticky; top: 0; z-index: 100; background: rgba(246,246,252,0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .nav-in { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+    .brand { font-family: "Golos Text"; font-weight: 800; font-size: 19px; display: flex; align-items: center; gap: 9px; }
+    .brand .dot { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display: grid; place-items: center; font-size: 17px; }
+    .nav a.back { font-size: 14px; font-weight: 600; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .nav a.back:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero { position: relative; padding: 92px 0 76px; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; top: -280px; right: -180px; width: 640px; height: 640px; border-radius: 50%; background: radial-gradient(circle, rgba(109,94,252,0.22), transparent 62%); z-index: 0; }
+    .hero::after { content: ""; position: absolute; bottom: -220px; left: -160px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(34,184,207,0.16), transparent 62%); z-index: 0; }
+    .hero-in { position: relative; z-index: 1; max-width: 760px; }
+    .badge { display: inline-flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--line); padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 700; color: var(--muted); box-shadow: 0 6px 18px -12px rgba(40,34,90,.4); }
+    .badge .live { width: 8px; height: 8px; border-radius: 50%; background: #46e39b; box-shadow: 0 0 0 0 rgba(70,227,155,.6); animation: liv 2s infinite; }
+    @keyframes liv { 0%{box-shadow:0 0 0 0 rgba(70,227,155,.6)} 70%{box-shadow:0 0 0 7px rgba(70,227,155,0)} 100%{box-shadow:0 0 0 0 rgba(70,227,155,0)} }
+    .hero h1 { font-size: clamp(38px, 6vw, 62px); font-weight: 900; margin: 22px 0 20px; }
+    .hero h1 span { background: linear-gradient(120deg, var(--accent), var(--accent-3)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p.lead { font-size: clamp(17px, 2.4vw, 21px); color: var(--muted); max-width: 620px; }
+    .cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+    .btn { font: inherit; font-weight: 700; font-size: 15.5px; padding: 15px 26px; border-radius: 14px; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 9px; transition: transform .2s, box-shadow .2s, background .2s; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; box-shadow: 0 16px 34px -12px rgba(109,94,252,.65); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 22px 42px -12px rgba(109,94,252,.75); }
+    .btn-ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
+    .btn-ghost:hover { transform: translateY(-2px); border-color: var(--accent); color: var(--accent); }
+    .hero-hint { margin-top: 26px; font-size: 14px; color: var(--muted); display: inline-flex; align-items: center; gap: 8px; }
+    .hero-hint svg { width: 18px; height: 18px; color: var(--accent); animation: point 1.8s ease-in-out infinite; }
+    @keyframes point { 0%,100%{transform:translateX(0)} 50%{transform:translateX(5px)} }
+
+    /* METRICS */
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
+    .metric { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+    .metric .n { font-family: "Golos Text"; font-weight: 900; font-size: 34px; background: linear-gradient(120deg, var(--accent), var(--accent-3)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .metric .l { color: var(--muted); font-size: 14.5px; margin-top: 4px; }
+
+    /* SECTIONS */
+    section.block { padding: 72px 0; }
+    .head { max-width: 640px; margin-bottom: 44px; }
+    .kicker { font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+    .head h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; margin-top: 12px; }
+    .head p { color: var(--muted); font-size: 17px; margin-top: 12px; }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px; transition: transform .25s, box-shadow .25s; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 24px 48px -22px rgba(40,34,90,.4); }
+    .card .ico { width: 50px; height: 50px; border-radius: 14px; background: linear-gradient(135deg, rgba(109,94,252,.14), rgba(34,184,207,.14)); display: grid; place-items: center; font-size: 25px; margin-bottom: 18px; }
+    .card h3 { font-size: 20px; font-weight: 700; margin-bottom: 9px; }
+    .card p { color: var(--muted); font-size: 15px; }
+
+    /* STEPS */
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; counter-reset: s; }
+    .step { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 30px 26px 26px; }
+    .step::before { counter-increment: s; content: counter(s); position: absolute; top: -16px; left: 26px; width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; font-family: "Golos Text"; font-weight: 800; font-size: 20px; display: grid; place-items: center; box-shadow: 0 10px 22px -8px rgba(109,94,252,.6); }
+    .step h3 { font-size: 18px; margin: 14px 0 8px; }
+    .step p { color: var(--muted); font-size: 15px; }
+
+    /* CTA */
+    .final { background: linear-gradient(135deg, #1a1440, #2a1f66); border-radius: 28px; padding: 56px 44px; text-align: center; color: #fff; position: relative; overflow: hidden; }
+    .final::before { content: ""; position: absolute; top: -120px; right: -80px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(143,123,255,.4), transparent 62%); }
+    .final-in { position: relative; z-index: 1; }
+    .final h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 900; }
+    .final p { color: rgba(255,255,255,.8); font-size: 18px; margin: 16px auto 30px; max-width: 520px; }
+    .final .btn-primary { background: #fff; color: var(--accent); box-shadow: 0 16px 34px -12px rgba(0,0,0,.5); }
+
+    footer { padding: 40px 0 120px; text-align: center; color: var(--muted); font-size: 14px; }
+    footer a { color: var(--accent); font-weight: 600; text-decoration: none; }
+
+    @media (max-width: 820px) {
+      .metrics, .cards, .steps { grid-template-columns: 1fr; }
+      .hero { padding: 60px 0 50px; }
+      .final { padding: 44px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap nav-in">
+      <div class="brand"><span class="dot">🤖</span> нейро·ассистент</div>
+      <a class="back" href="https://trip-prog.github.io">← в портфолио</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap hero-in">
+      <span class="badge"><span class="live"></span> живое демо — чат в правом нижнем углу</span>
+      <h1>ИИ-ассистент, который <span>отвечает клиентам</span> за вас 24/7</h1>
+      <p class="lead">Отвечает на сайте и в Telegram по базе знаний вашей компании — цены, услуги, сроки, условия. Не выдумывает: говорит только то, что есть в вашей базе.</p>
+      <div class="cta">
+        <button class="btn btn-primary" id="try">💬 Попробовать ассистента</button>
+        <a class="btn btn-ghost" href="mailto:tripolev04@gmail.com?subject=Хочу%20ИИ-ассистента">Обсудить внедрение</a>
+      </div>
+      <div class="hero-hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        нажмите на пузырёк чата и задайте любой вопрос про студию
+      </div>
+
+      <div class="metrics">
+        <div class="metric"><div class="n">24/7</div><div class="l">отвечает без выходных и обеда</div></div>
+        <div class="metric"><div class="n">&lt;3 сек</div><div class="l">среднее время ответа клиенту</div></div>
+        <div class="metric"><div class="n">0 ₽</div><div class="l">за каждый следующий диалог</div></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="block wrap">
+    <div class="head">
+      <div class="kicker">возможности</div>
+      <h2>Снимает с вас рутину переписки</h2>
+      <p>Пока вы заняты делом, ассистент отвечает на типовые вопросы — а сложные передаёт вам.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="ico">📚</div><h3>Знает ваш бизнес</h3><p>Загружаете базу знаний — услуги, цены, условия — и ассистент отвечает строго по ней, без фантазий.</p></div>
+      <div class="card"><div class="ico">🎯</div><h3>Не выдумывает</h3><p>Если ответа в базе нет — честно скажет и предложит связаться с вами. Никаких выдуманных цен и обещаний.</p></div>
+      <div class="card"><div class="ico">⚡</div><h3>Отвечает мгновенно</h3><p>Клиент получает ответ в первую же секунду, а не через час. Меньше потерянных заявок из-за молчания.</p></div>
+      <div class="card"><div class="ico">🌐</div><h3>Сайт и Telegram</h3><p>Один и тот же ассистент работает виджетом на сайте и ботом в Telegram — с единой базой знаний.</p></div>
+      <div class="card"><div class="ico">🇷🇺</div><h3>Работает в России</h3><p>На YandexGPT или GigaChat — без VPN и зарубежных карт. Оплата рублями, данные не уходят за рубеж.</p></div>
+      <div class="card"><div class="ico">🛠️</div><h3>Легко обновлять</h3><p>Поменялись цены — правите один файл базы знаний, и ассистент сразу отвечает по-новому.</p></div>
+    </div>
+  </section>
+
+  <section class="block wrap">
+    <div class="head">
+      <div class="kicker">как это устроено</div>
+      <h2>Технология RAG — простыми словами</h2>
+      <p>Ассистент не «знает всё из головы», а каждый раз сверяется с вашей базой. Поэтому отвечает точно.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>Читает базу знаний</h3><p>Ваши услуги, цены и условия разбиваются на разделы и превращаются в понятный нейросети вид.</p></div>
+      <div class="step"><h3>Находит нужное</h3><p>На вопрос клиента ассистент ищет самые подходящие разделы базы — как поиск, только умный.</p></div>
+      <div class="step"><h3>Формулирует ответ</h3><p>Нейросеть собирает из найденного живой, вежливый ответ на языке клиента — и предлагает оставить заявку.</p></div>
+    </div>
+  </section>
+
+  <section class="block wrap">
+    <div class="final">
+      <div class="final-in">
+        <h2>Хотите такого же ассистента для своего бизнеса?</h2>
+        <p>Настрою под вашу нишу, наполню базу знаний и подключу к сайту и Telegram. Внедрение — от 40 000 ₽.</p>
+        <a class="btn btn-primary" href="mailto:tripolev04@gmail.com?subject=Хочу%20ИИ-ассистента%20для%20бизнеса">Написать и обсудить</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    Сделано trip-prog · <a href="https://trip-prog.github.io">портфолио</a> · <a href="mailto:tripolev04@gmail.com">tripolev04@gmail.com</a>
+  </footer>
+
+  <script>
+    window.NEURO_ASSISTANT = {
+      endpoint: '/api',
+      kb: 'kb.json',
+      title: 'Ассистент студии trip-prog',
+      subtitle: 'обычно отвечает сразу',
+    }
+  </script>
+  <script src="assets/widget.js"></script>
+  <script>
+    document.getElementById('try').addEventListener('click', () => {
+      document.querySelector('.na-launcher')?.click()
+    })
+  </script>
+</body>
+</html>
